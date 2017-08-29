@@ -1,0 +1,34 @@
+{
+    "UID" : 1,
+    "name" : "Example trip",
+    "stages":
+          [
+             {
+                   "name" : "Stage 1 - Parameters Example",
+		   "stageID" : "s1",
+                   "comment" : "This example shows different parameters that can be applied to scripts",
+                   "parameters" : 
+                        {
+                             "amount" : "int",
+                             "choice" : "bool",
+                             "field" : "string",
+                             "toggle" : ["Option A", "Option B"]
+                        },
+                   "script" : "printy.py",
+                   "scriptArgs" : {
+			"amount" : "--amount", 
+			"choice" : "--choice", 
+			"field" : "--field",
+			"toggle" : "--toggle"
+			},
+                   "logging" : "False"
+              },
+              {
+                   "name" : "Stage 2 - Logging Example",
+		   "stageID" : "s2",
+                   "comment" : "This example shows basic logging capability",
+                   "script" : "loggy.py",
+                   "logging" : "True"
+              }
+         ]     
+}
