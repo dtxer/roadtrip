@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> I found these Trips defined in the trips folder </h1>
+
+<div class="table">
+   <div class="tr">
+     <div class="td"> <b> Trip Title </b> </div>
+     <div class="td"> <b> Trip Status </b> </div>
+     <div class="td"> <b> Actions </b> </div>
+   </div>
+   {% for trip in trips %}
+   <div class="tr">
+     <div class="td"> {{ trip.name }}  </div>
+     <div class="td"> {{ trip.status }} </div>
+     {% if trip.filename %}
+     <div class="td"> <a href="trip/{{ trip.filename}}"> run </a> </div>
+     {% else %}
+     <div class="td"> -  </div>
+     {% endif %}
+   </div>
+   {% endfor %}
+</div>
+
+{% endblock %}
+

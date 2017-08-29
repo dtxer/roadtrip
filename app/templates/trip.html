@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+   {% for stage in trip.stages %}
+	function {{stage.stageID}}(){
+	{% for arg in stage.scriptArgs %}
+            {% if stage.parameters[arg] == "bool" %}
+            var {{arg}} = document.getElementsByName("{{stage.stageID}}.{{arg}}")[0].checked;
+	    {% else %}
+	    var {{arg}} = document.getElementsByName("{{stage.stageID}}.{{arg}}")[0].value;
+            {% endif %}
+        {% endfor %}
+	    
+            var runline = "/runner?script={{stage.script}}"{% for arg in stage.scriptArgs %} + "&{{arg}}=" + {{arg}}{% endfor %};
+	    window.open(runline);
+        } 
+       
+   {% endfor %}
+</script>
+
+<h1> Viewing Trip: {{trip.name}}  </h1>
+   {% for stage in trip.stages %}
+	<p>
+            <div><b>Trip Stage {{stage.name}}</b></div>
+	    <div> Logging Enabled {{stage.logging}} </div>
+	    <div> <i> {{stage.comment}} </i> </div>
+            {% for p in stage.parameters %}
+		{% if stage.parameters[p] == "int" %}
+		    <div>{{p}} : <input type="number" name="{{stage.stageID}}.{{p}}" step="1"/></div>
+		{% elif stage.parameters[p] == "bool" %}
+		    <div>{{p}} : <input type="checkbox" name="{{stage.stageID}}.{{p}}"/></div>		
+		{% elif stage.parameters[p] == "string" %}
+		    <div>{{p}} : <input type="text" name="{{stage.stageID}}.{{p}}"/></div>
+		{% elif stage.parameters[p] is iterable and stage.parameters[p] is not string %}
+		    <fieldset class="fieldset-auto-width" name="{{stage.stageID}}.{{p}}">
+		    {% for c in stage.parameters[p] %}
+			<label class="block"><input type="radio" name="radgroup" value="{{stage.stageID}}.{{p}}.{{c}}">{{c}}</label>
+                    {% endfor %}
+		    </fieldset>
+		{% endif %}
+	    {% endfor %}
+	    <div>{{stage.script}}</div>
+            <button type="button" onClick="{{stage.stageID}}()">Run!</button>
+	</p>
+   {% endfor %}
+{% endblock %}

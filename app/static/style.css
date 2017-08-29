@@ -1,0 +1,18 @@
+div.table { 
+  display: table; 
+  border-collapse:collapse; 
+}
+div.tr { 
+  display:table-row; 
+}
+div.td { 
+  display:table-cell; 
+  border:thin solid green; 
+  padding:5px; 
+}
+.block {
+  display: block;
+}
+.fieldset-auto-width {
+  display: inline-block;
+}

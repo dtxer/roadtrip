@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> Viewing Trip: {{trip.name}}  </h1>
+    {% for stage in trip %}
+    <div>
+        {% if trip.parameters %}
+            {% for p in
+        {% endif %}
+    </div>
+    {% endfor %}
+{% endblock %}
+
+

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> Viewing Trip: {{trip.name}}  </h1>
+   {% for stage in trip.stages %}
+	<p>
+            <>Trip Stage {{stage.name}}</div>
+	    <div> Logging Enabled {{stage.logging}} </div>
+            {% for p in stage.parameters %}
+		<div>{{p}}</div>
+	    {% endfor %}
+            <div>{{ stage.script }}</div>
+            <button type="button">Run!</button>
+	</p>
+   {% endfor %}
+
+{% endblock %}
+
+
